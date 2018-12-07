@@ -37,13 +37,13 @@ module.exports = {
         loader: 'ts-loader',
         options: {
           happyPackMode: true,
-        }
+        },
       }],
       threadPool: happyThreadPool,
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.resolve(__dirname, "dist"),
     compress: true,
     hot: true,
     port: 9000,
