@@ -10,7 +10,7 @@ const { NamedModulesPlugin, HotModuleReplacementPlugin } = webpack;
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src', 'index.ts'),
+  entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.bundle.js',
