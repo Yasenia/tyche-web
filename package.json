@@ -1,0 +1,28 @@
+{
+  "name": "tyche-web",
+  "version": "1.0.0",
+  "description": "A lottery program.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --open --mode=development",
+    "build": "webpack --mode=production",
+    "lint": "tslint --fix ./src/*.ts ./src/*.tsx",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ysdeng",
+  "license": "ISC",
+  "devDependencies": {
+    "happypack": "^5.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "ts-loader": "^5.3.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.2.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yasenia/tyche-web.git"
+  }
+}
