@@ -6,8 +6,7 @@ const os = require('os');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const { NamedModulesPlugin, HotModuleReplacementPlugin } = webpack;
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+const { NamedModulesPlugin, HotModuleReplacementPlugin, WatchIgnorePlugin } = webpack;
 
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -15,11 +14,23 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.bundle.js',
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
+  },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: 'happypack/loader?id=tsx',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          "typings-for-css-modules-loader?modules&namedExport&camelCase",
+          "sass-loader",
+        ],
         exclude: /node_modules/,
       },
     ],
@@ -31,15 +42,11 @@ module.exports = {
     }),
     new NamedModulesPlugin(),
     new HotModuleReplacementPlugin(),
+    new WatchIgnorePlugin([/css\.d\.ts$/]),
     new HappyPack({
       id: 'tsx',
-      loaders: [{
-        loader: 'ts-loader',
-        options: {
-          happyPackMode: true,
-        },
-      }],
-      threadPool: happyThreadPool,
+      loaders: ['ts-loader?happyPackMode'],
+      threadPool: HappyPack.ThreadPool({ size: os.cpus().length }),
     }),
   ],
   devServer: {

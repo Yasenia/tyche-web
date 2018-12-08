@@ -1,9 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-
-const Hello: React.FunctionComponent<{ name: string }> = ({name}) => (<div>Hello {name}!</div>);
+import Hello from "./components/Hello/index";
 
 ReactDOM.render(
-  <Hello name="tyche"/>,
+  <Hello name="tyche" />,
   document.getElementById("root") as HTMLElement,
 );
