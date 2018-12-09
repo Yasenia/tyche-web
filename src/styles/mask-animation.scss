@@ -1,0 +1,27 @@
+@mixin maskAnimation(
+  $selector,
+  $url,
+  $frames, $windowWidth, $windowHeight,
+  $strideX, $strideY, $offsetX, $offsetY
+) {
+
+  @keyframes #{$selector}Drawing {
+    @for $i from 0 to $frames {
+      #{100 / $frames * $i}% {
+        background-position: #{-$i * $strideX + $offsetX}px #{-$i * $strideY + $offsetY}px;
+      }
+    }
+  }
+
+  #{$selector} {
+    animation-name: #{$selector}Drawing;
+    animation-duration: 1s;
+    animation-timing-function: step-end;
+    animation-iteration-count: infinite;
+
+    background: $url;
+    width: #{$windowWidth}px;
+    height: #{$windowHeight}px;
+  }
+
+}

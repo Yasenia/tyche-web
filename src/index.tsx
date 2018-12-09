@@ -1,8 +1,10 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import Hello from "./components/Hello/index";
+import Sheep from "./components/Sheep";
 
 ReactDOM.render(
-  <Hello name="tyche" />,
+  <>
+    <Sheep/>
+  </>,
   document.getElementById("root") as HTMLElement,
 );

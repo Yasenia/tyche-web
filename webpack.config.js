@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const { NamedModulesPlugin, HotModuleReplacementPlugin, WatchIgnorePlugin } = webpack;
+const happyPackThreadPool = HappyPack.ThreadPool({ size: os.cpus().length - 1});
 
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -26,12 +27,14 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          "style-loader",
-          "typings-for-css-modules-loader?modules&namedExport&camelCase",
-          "sass-loader",
-        ],
+        use: 'happypack/loader?id=styles',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          "url-loader?limit=8192"
+        ],
       },
     ],
   },
@@ -46,8 +49,17 @@ module.exports = {
     new HappyPack({
       id: 'tsx',
       loaders: ['ts-loader?happyPackMode'],
-      threadPool: HappyPack.ThreadPool({ size: os.cpus().length }),
+      threadPool: happyPackThreadPool,
     }),
+    new HappyPack({
+      id: 'styles',
+      loaders: [
+        "style-loader",
+        "typings-for-css-modules-loader?modules&namedExport&camelCase&localIdentName=[local]--[hash:base64:4]",
+        "sass-loader",
+      ],
+      threadPool: happyPackThreadPool,
+    })
   ],
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
