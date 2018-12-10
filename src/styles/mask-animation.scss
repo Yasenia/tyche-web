@@ -4,17 +4,17 @@
   $frames, $windowWidth, $windowHeight,
   $strideX, $strideY, $offsetX, $offsetY
 ) {
-
-  @keyframes #{$selector}Drawing {
-    @for $i from 0 to $frames {
-      #{100 / $frames * $i}% {
-        background-position: #{-$i * $strideX + $offsetX}px #{-$i * $strideY + $offsetY}px;
+  #{$selector} {
+    $keyframesId: drawing-#{random()};
+    @keyframes #{$keyframesId} {
+      @for $i from 0 to $frames {
+        #{100 / $frames * $i}% {
+          background-position-x: #{-$i * $strideX + $offsetX}px;
+          background-position-y: #{-$i * $strideY + $offsetY}px;
+        }
       }
     }
-  }
-
-  #{$selector} {
-    animation-name: #{$selector}Drawing;
+    animation-name: $keyframesId;
     animation-duration: 1s;
     animation-timing-function: step-end;
     animation-iteration-count: infinite;
@@ -23,5 +23,4 @@
     width: #{$windowWidth}px;
     height: #{$windowHeight}px;
   }
-
 }
