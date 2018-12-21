@@ -4,6 +4,7 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
+    "lib": ["es2017", "dom"],
     "target": "es5",
     "jsx": "react",
     "allowJs": true

@@ -2,8 +2,9 @@
 
 const webpack = require('webpack');
 const HappyPack = require('happypack');
-const os = require('os');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const os = require('os');
 const path = require('path');
 
 const { NamedModulesPlugin, HotModuleReplacementPlugin, WatchIgnorePlugin } = webpack;
@@ -16,7 +17,7 @@ module.exports = {
     filename: 'index.bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   module: {
     rules: [
@@ -32,9 +33,8 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          "url-loader?limit=8192"
-        ],
+        use: "url-loader?limit=8192",
+        exclude: /node_modules/,
       },
     ],
   },

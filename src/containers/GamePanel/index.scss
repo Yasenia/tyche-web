@@ -1,0 +1,103 @@
+@import "../../styles/mask-animation";
+
+:local {
+
+  body {
+    margin: 0;
+    cursor: url("../../assets/claw.png"), auto;
+  }
+  .wrapper {
+    background: url("../../assets/grass-green.png"), url("../../assets/tw-logo.png") ;
+    background-position: center bottom, center 2vw;
+    background-repeat: repeat, no-repeat;
+    background-color: #abe8cc;
+    transition: background-color 3s;
+    background-size: 50vw, 15vw;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    .kickOff {
+      user-select: none;
+      margin: 20px 20px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+      background-color: #666666;
+      border: none;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      &:active {
+        border: none;
+        outline: none;
+      }
+      &:focus {
+        border: none;
+        outline: none;
+      }
+    }
+
+    .prairie {
+      position: absolute;
+      background: url("../../assets/grass-yellow.png");
+      background-size: 50vw;
+      transition: background-color 3s;
+    }
+
+    .barrier {
+      width: 100%;
+      position: absolute;
+      background: url("../../assets/barrier.png"), url("../../assets/nameplate.png");
+      background-position: center bottom, bottom 5vh right 5vw;
+      background-repeat: repeat-x, no-repeat;
+      background-size: 30vw, 15vw;
+      pointer-events: none;
+      z-index: 99999;
+    }
+
+    .sheep {
+      position: absolute;
+      transition: opacity 1s;
+      line-height: 80px;
+      text-align: center;
+      span {
+        user-select: none;
+        display: inline-block;
+        font-size: 24px;
+        font-family: "PingFang SC", sans-serif;
+        font-weight: bold;
+        color: #333333;
+      }
+    }
+    .sheep-transparent {
+      opacity: 0;
+    }
+    .reverse {
+      span {
+        transform: scale(-1, 1);
+      }
+      transform: scale(-1, 1);
+    }
+    @for $i from 1 through 8 {
+      @include maskAnimation(".sheep#{$i}",
+              url("../../assets/sheep#{$i}.png"),
+              8, 120, 90,
+              120, 0, 0, 0
+      );
+      @include maskAnimation(".sheep#{$i}:active",
+              url("../../assets/sheep#{$i}.png"),
+              8, 120, 90,
+              120, 0, 0, 90
+      );
+      .luckySheep#{$i} {
+        width: 120px;
+        height: 90px;
+        background: url("../../assets/sheep#{$i}-lucky.png") no-repeat;
+      }
+    }
+
+  }
+}
