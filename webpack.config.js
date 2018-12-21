@@ -78,10 +78,10 @@ module.exports = {
     },
     splitChunks: {
       cacheGroups: {
-        "nameplate": {
-          name: "nameplate",
+        "participants": {
+          name: "participants",
           chunks: "all",
-          test: /[\\/]data[\\/]/,
+          test: /[\\/]data[\\/]participants/,
           minSize: 0,
           priority: 10,
         },
