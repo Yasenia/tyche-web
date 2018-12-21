@@ -3,9 +3,9 @@ import * as ReactDOM from "react-dom";
 import GamePanel from "./containers/GamePanel";
 import {Sheep} from "./types/sheep";
 import {getStoredLuckySheep} from "./utils/storage";
+import { participants } from "./data/participants";
 
 const luckyFlock = getStoredLuckySheep();
-const participants = require("./data/participants.json");
 const root = document.getElementById("root") as HTMLElement;
 const flock = participants
   .map((name: string, index: number) => ({id: index.toString(), name}) as Sheep)

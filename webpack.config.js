@@ -3,6 +3,7 @@
 const webpack = require('webpack');
 const HappyPack = require('happypack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const os = require('os');
 const path = require('path');
@@ -14,7 +15,8 @@ module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.bundle.js',
+    filename: '[name].[hash].js',
+    chunkFilename: "[name].[chunkhash:6].js"
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -39,6 +41,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(['dist'], {
+      root: path.join(__dirname, './')
+    }),
     new HtmlWebpackPlugin({
       title: 'tyche',
       template: path.resolve(__dirname, 'src', 'index.html'),
@@ -67,4 +72,26 @@ module.exports = {
     hot: true,
     port: 9000,
   },
+  optimization: {
+    runtimeChunk: {
+      name: "runtime"
+    },
+    splitChunks: {
+      cacheGroups: {
+        "nameplate": {
+          name: "nameplate",
+          chunks: "all",
+          test: /[\\/]data[\\/]/,
+          minSize: 0,
+          priority: 10,
+        },
+        vendors: {
+          name: "vendors",
+          chunks: "all",
+          test: /[\\/]node_modules[\\/]/,
+          priority: 10
+        },
+      }
+    }
+  }
 };

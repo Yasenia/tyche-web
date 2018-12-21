@@ -20,6 +20,7 @@
     "react-draggable": "^3.0.5"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^0.28.11",
     "file-loader": "^2.0.0",
     "happypack": "^5.0.0",
